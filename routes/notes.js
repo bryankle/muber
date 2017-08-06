@@ -1,0 +1,5 @@
+/*
+
+Routes folder created to keep root folder clean
+
+*/
