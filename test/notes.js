@@ -1,0 +1,5 @@
+/*
+
+No need for test helper unless working with Mongoose
+
+*/
