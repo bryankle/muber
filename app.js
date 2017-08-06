@@ -5,8 +5,6 @@ const app = express();
 // Router
 // Watch for incoming requests of method GET
 // to the route http://localhost:3050/api 
-app.get('/api', (req, res) => { // App listens on '/api' and executes callback when GET is requested. Takes 2 arguments, req and res object 
-    res.send({ hi: 'there' });
-})
+routes(app);
 
 module.exports = app;
