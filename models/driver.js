@@ -13,4 +13,6 @@ const DriverSchema = new Schema({
 });
 
 const Driver = mongoose.model('driver', DriverSchema);
-model.exports = Driver;
+module.exports = Driver;
+
+// This model must be required somewhere for it ro run properly when referenced to ie: driver_controller_test

@@ -2,6 +2,7 @@ const express = require('express'); // Express is used to simplify HTTP requests
 const bodyParser = require('body-parser');
 const routes = require('./routes/routes');
 const app = express();
+
 // ALWAYS place app.use above the routes call
 app.use(bodyParser.json()); // Why are we referencing the JSON and its method? -> this assumes anything coming in is JSON and parse whatever comes in
 
