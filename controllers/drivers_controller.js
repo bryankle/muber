@@ -14,6 +14,16 @@ module.exports = {
         Driver.create(driverProps)  // We create a new driver here based on the model which requires an email as a string. 
             .then(driver => res.send(driver)) // Once a driver has been created, let it be known as 'driver' and send back the driver as 'driver' to the user
             .catch(next); // Error handling; if there is an error here, catch error and call next to force next middleware to execute
+    },
+
+    edit(req, res, next) {
+        const driverId = req.params.id; // Gains access to id listed in routes.js; parameters must match
+        const driverProps = req.body; // Body of request will have updates to apply to driver, similar to method 'create'
+        
+        Driver.findByIdAndUpdate({ _id: driverId }, driverProps) // Downside of this function: .then ((driver) => ); driver is not called with driver that is updated; only statistics
+        .then(() => Driver.findById({ _id: driverId })) // Since 'driver' in .then will not produce the updated 'driver', we will search again to find updated driver
+        .then(driver => res.send(driver)) // Return updated 'driver' in response object
+        .catch(next); // If there are any errors while trying to find driver, proceed to next middleware
     }
 };
 
