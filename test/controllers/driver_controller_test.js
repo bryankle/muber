@@ -3,7 +3,6 @@ const assert = require('assert');
 const request = require('supertest');
 const mongoose = require('mongoose');
 const app = require('../../app');
-
 const Driver = mongoose.model('driver'); // Cannot require into here because of compatibility issues with Express and Mongoose; Mocha will try to require more than once. Must be required in at least one location for model code to run
 
 describe('Drivers controller', () => {
