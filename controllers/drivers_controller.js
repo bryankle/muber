@@ -24,6 +24,14 @@ module.exports = {
         .then(() => Driver.findById({ _id: driverId })) // Since 'driver' in .then will not produce the updated 'driver', we will search again to find updated driver
         .then(driver => res.send(driver)) // Return updated 'driver' in response object
         .catch(next); // If there are any errors while trying to find driver, proceed to next middleware
+    },
+
+    delete(req, res, next) {
+        const driverId = req.params.id;
+        
+        Driver.findByIdAndRemove({ _id: driverId})
+        .then(driver => res.status(204).send(driver)) // .then will return the 'driver' which was deleted. Assign status code 204 to indicate succession removal
+        .catch(next);
     }
 };
 

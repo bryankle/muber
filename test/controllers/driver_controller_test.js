@@ -42,4 +42,21 @@ describe('Drivers controller', () => {
                 });
         });
     });
+
+    it('DELETE to /api/drivers/id can delete a driver', (done) => {
+        const driver = new Driver({ email: 'test@test.com'})
+        driver.save().then(() => {
+            request(app)
+                .delete(`/api/drivers/${driver._id}`)
+                .end(() => {
+                    Driver.findOne({ email: 'test@test.com' })
+                        .then((driver) => {
+                            assert(driver === null);
+                            done();
+                        })
+                })
+        })
+    })
 });
+
+// Question: why are the database test methods different than the Mongo methods used in production?
