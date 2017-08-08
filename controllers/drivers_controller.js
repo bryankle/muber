@@ -6,14 +6,14 @@ module.exports = {
         res.send({ hi: 'there' })
     },
 
-    create(req, res) {
+    create(req, res, next) {
         // console.log('Then create was ran')
         // console.log(req.body);
         // res.send({ hi: 'there' });
         const driverProps = req.body; // req comes from driver_controller_test.js in email form
         Driver.create(driverProps)  // We create a new driver here based on the model which requires an email as a string. 
             .then(driver => res.send(driver)) // Once a driver has been created, let it be known as 'driver' and send back the driver as 'driver' to the user
-            .catch(next); // If there is an error here, catch error and call next to force next middleware to execute
+            .catch(next); // Error handling; if there is an error here, catch error and call next to force next middleware to execute
     }
 };
 
