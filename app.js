@@ -18,7 +18,7 @@ app.use(bodyParser.json()); // Why are we referencing the JSON and its method? -
 routes(app);
 
 app.use((err, req, res, next) => {
-    res.send({ error: err.message });
+    res.status(422).send({ error: err.message });
 })
 // err - throws an error if previous middleware produced an error
 // req - incoming request object
