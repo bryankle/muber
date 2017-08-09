@@ -11,6 +11,7 @@ before(done => { // Checks if test environment is active; note that conditional 
     beforeEach(done => {
         const { drivers } = mongoose.connection.collections;
         drivers.drop()
+           .then(() => drivers.ensureIndex({ 'geometry.coordinates': '2dsphere' })) // Ensures that before tests are ran, index is placed in collection, recreate index. Error without this line is text: '{"error":"no geo indices for geoNear"}'
             .then(() => done()) 
             .catch(() => done()); // Very first time database runs error thrown to drop non existent collection
     })

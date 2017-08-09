@@ -6,6 +6,17 @@ module.exports = {
         res.send({ hi: 'there' })
     },
 
+    index(req, res, next) { // Search for geonear in mongoose documentation; look for a collection of records near a particular point
+        const { lng, lat } = req.query; // ES6 syntax; lng and lat being pulled from req.query; Express will parse from URL and put into req.query
+        // geoNear documentation in mongoose
+        Driver.geoNear( // Look at Driver collection and run geoNear query over it
+            { type: 'Point', coordinates: [lng, lat] },
+            { spherical: true, maxDistance: 200000 } // distance in meters
+        )
+            .then(drivers => res.send(drivers)) // Sends back request after running geoNear on driver
+            .catch(next);
+    },
+
     create(req, res, next) {
         // console.log('Then create was ran')
         // console.log(req.body);
