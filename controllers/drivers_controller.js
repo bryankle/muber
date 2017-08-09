@@ -10,7 +10,7 @@ module.exports = {
         const { lng, lat } = req.query; // ES6 syntax; lng and lat being pulled from req.query; Express will parse from URL and put into req.query
         // geoNear documentation in mongoose
         Driver.geoNear( // Look at Driver collection and run geoNear query over it
-            { type: 'Point', coordinates: [lng, lat] },
+            { type: 'Point', coordinates: [parseFloat(lng), parseFloat(lat)] },
             { spherical: true, maxDistance: 200000 } // distance in meters
         )
             .then(drivers => res.send(drivers)) // Sends back request after running geoNear on driver
